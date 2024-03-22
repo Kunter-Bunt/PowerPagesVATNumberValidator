@@ -1,0 +1,17 @@
+.pcfvatcontainer {
+  height: 32px;
+  width: 100%;
+}
+
+.pcfvatinput
+{
+  width: 80%;
+  float: left;
+}
+
+.pcfvatimage
+{
+  padding-left: 5px;
+  float: left;
+  height: 100%;
+}

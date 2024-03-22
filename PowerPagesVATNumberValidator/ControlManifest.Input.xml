@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <control 
+    namespace="PowerPagesVATNumberValidator" 
+    constructor="PowerPagesVATNumberValidator" 
+    version="0.0.6" 
+    display-name-key="PowerPagesVATNumberValidator" 
+    description-key="PowerPagesVATNumberValidator allows you to validate the entry of a VAT Number by checking it with the European Commission and retrieving, depending on the configuration, the address and the name of the company." 
+    control-type="virtual" 
+  >
+    <!--external-service-usage node declares whether this 3rd party PCF control is using external service or not, if yes, this control will be considered as premium and please also add the external domain it is using.
+    If it is not using any external service, please set the enabled="false" and DO NOT add any domain below. The "enabled" will be false by default.
+    Example1:
+      <external-service-usage enabled="true">
+        <domain>www.Microsoft.com</domain>
+      </external-service-usage>
+    Example2:
+      <external-service-usage enabled="false">
+      </external-service-usage>
+    -->
+    <external-service-usage enabled="false">
+      <!--UNCOMMENT TO ADD EXTERNAL DOMAINS
+      <domain></domain>
+      <domain></domain>
+      -->
+    </external-service-usage>
+    <!-- property node identifies a specific, configurable piece of data that the control expects from CDS -->
+    <property 
+      name="vatNumberfield" 
+      display-name-key="VAT Number Field" 
+      description-key="Field containing the VAT Number." 
+      of-type-group="textFields" 
+      usage="bound" 
+      required="true" 
+    />
+    <property 
+      name="isVatNumberValid" 
+      display-name-key="VAT number validity field" 
+      description-key="Boolean field filled-in with the output validity of the VAT Number." 
+      of-type="TwoOptions" 
+      usage="bound" 
+      required="false" 
+    />
+    <property 
+      name="companyName" 
+      display-name-key="Company Name" 
+      description-key="Field that will be used to insert the name of the found company." 
+      of-type-group="textFields" 
+      usage="bound" 
+      required="false" 
+    />
+    <property 
+      name="companyAddress" 
+      display-name-key="Company Address" 
+      description-key="Field that will be used to insert the address of the found company." 
+      of-type-group="textFields" 
+      usage="bound" 
+      required="false" 
+    />
+    <property 
+      name="displayDialog" 
+      display-name-key="displayDialog" 
+      description-key="Specifies whether you want to display error message(s) in the following cases." 
+      usage="input" 
+      of-type="Enum" 
+      required="false"
+    >
+      <value 
+        name="NotFound" 
+        display-name-key="displayNotFound" 
+        description-key="Display message only if no result found."
+      >NotFound</value>
+      <value 
+        name="ApiError" 
+        display-name-key="displayApiError" 
+        description-key="Display message only if service is unavailable or crashed."
+      >ApiError</value>
+      <value 
+        name="Both" 
+        display-name-key="displayBoth" 
+        description-key="Display message only if service is unavailable or crashed and if no result found." 
+        default="true"
+      >Both</value>
+    </property>
+
+    <type-group name="textFields">
+      <type>SingleLine.Text</type>
+      <type>SingleLine.TextArea</type>
+      <type>Multiple</type>
+    </type-group>
+
+    <resources>
+      <platform-library name="React" version="16.8.6" />
+      <platform-library name="Fluent" version="8.29.0" />
+      <code path="index.ts" order="1"/>
+      <css path="css/Control.css" order="2" />
+      <img path="img/at.png" />
+    </resources>
+
+    <!-- UNCOMMENT TO ENABLE THE SPECIFIED API
+    <feature-usage>
+      <uses-feature name="Device.captureAudio" required="true" />
+      <uses-feature name="Device.captureImage" required="true" />
+      <uses-feature name="Device.captureVideo" required="true" />
+      <uses-feature name="Device.getBarcodeValue" required="true" />
+      <uses-feature name="Device.getCurrentPosition" required="true" />
+      <uses-feature name="Device.pickFile" required="true" />
+      <uses-feature name="Utility" required="true" />
+      <uses-feature name="WebAPI" required="true" />
+    </feature-usage>
+    -->
+  </control>
+</manifest>
